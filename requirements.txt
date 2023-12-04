@@ -5,3 +5,6 @@ gTTS
 googletrans==4.0.0-rc1
 pydub
 ipython
+--find-links https://download.pytorch.org/whl/torch_stable.html torch==2.1.1+cpu
+--find-links https://download.pytorch.org/whl/torch_stable.html torchaudio==2.1.1+cpu
+--find-links https://download.pytorch.org/whl/torch_stable.html torchvision==0.16.1+cpu
