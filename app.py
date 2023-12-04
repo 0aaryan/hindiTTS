@@ -105,19 +105,20 @@ def main():
     _, col3, _ = st.columns(3)
     with col3:
         if st.button("Convert to speech 🔊"):
-            if engine == "🗣️ Realistic voice":
-                tts = TextToSpeech()
-                if st.session_state.hinditext:
-                    audio_file = tts.text_to_audio(text=st.session_state.hinditext, play_chunks=False, play_combined=True)
-                    st.session_state.audio_file = audio_file
-                else:
-                    st.warning("Please enter text in Hindi text area to convert to speech. 🇮🇳")
-            elif engine == "🤖 Robot voice":
-                if st.session_state.gttsText:
-                    audio_file = text_to_speech_gtts(st.session_state.gttsText)
-                    st.session_state.audio_file = audio_file
-                else:
-                    st.warning("Please enter text in Hindi or English to convert to speech. 🇮🇳🇬🇧")
+            with st.spinner("Converting text to speech... 🔊"):
+                if engine == "🗣️ Realistic voice":
+                    tts = TextToSpeech()
+                    if st.session_state.hinditext:
+                        audio_file = tts.text_to_audio(text=st.session_state.hinditext, play_chunks=False, play_combined=True)
+                        st.session_state.audio_file = audio_file
+                    else:
+                        st.warning("Please enter text in Hindi text area to convert to speech. 🇮🇳")
+                elif engine == "🤖 Robot voice":
+                    if st.session_state.gttsText:
+                        audio_file = text_to_speech_gtts(st.session_state.gttsText)
+                        st.session_state.audio_file = audio_file
+                    else:
+                        st.warning("Please enter text in Hindi or English to convert to speech. 🇮🇳🇬🇧")
 
     if st.session_state.audio_file:
         st.audio(st.session_state.audio_file, format='audio/mp3')
