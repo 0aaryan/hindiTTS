@@ -81,7 +81,7 @@ class TextToSpeech:
 
 
         # Save the combined audio to a mp3 file using tmpfile
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_file:
+        with tempfile.NamedTemporaryFile(delete=False, suffix="wav") as temp_file:
             temp_filename = temp_file.name
             combined_audio_normalized = combined_audio / np.max(np.abs(combined_audio))
             combined_audio_normalized = combined_audio_normalized * 32767

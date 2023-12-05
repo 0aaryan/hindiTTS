@@ -127,7 +127,7 @@ def main():
                         st.warning("Please enter text in Hindi or English to convert to speech. 🇮🇳🇬🇧")
 
     if st.session_state.audio_file:
-        st.audio(st.session_state.audio_file, format='audio/mp3')
+        st.audio(st.session_state.audio_file, format='audio/wav')
 
     # Audio options using pydub pitch and speed
     st.subheader("Audio options 🎧")
