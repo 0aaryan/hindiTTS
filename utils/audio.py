@@ -1,6 +1,5 @@
 from transformers import VitsModel, AutoTokenizer
 import torch
-from IPython.display import Audio, display
 import numpy as np
 from scipy.io import wavfile
 import tempfile
@@ -58,9 +57,6 @@ class TextToSpeech:
             
             # Normalize and play the chunk
             audio_chunk_normalized = audio_chunk / np.max(np.abs(audio_chunk))
-            if play_chunks:
-                display(Audio(audio_chunk_normalized, rate=self.model.config.sampling_rate))
-            
             combined_audio.append(audio_chunk_normalized)
             print(f'audio_chunk {i} shape: {audio_chunk_normalized.shape}')
             max_length = max(max_length, len(audio_chunk_normalized))
@@ -71,16 +67,15 @@ class TextToSpeech:
         
 
 
-    def text_to_audio(self, text, play_chunks=False,play_combined=True):
+    def text_to_audio(self, text, play_chunks=False,play_combined=False):
+        print("Processing text...")
         combined_audio = self.process_and_combine_text(text, play_chunks)
 
         if combined_audio.size == 0:
             print("No audio data to display.")
             return
 
-        # Display the final combined audio
-        if play_combined:
-            display(Audio(combined_audio, rate=self.model.config.sampling_rate))
+
 
         # Save the combined audio to a mp3 file using tmpfile
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_file:
@@ -91,35 +86,6 @@ class TextToSpeech:
             wavfile.write(temp_filename, self.model.config.sampling_rate, combined_audio_normalized.T)
             print(f"Audio saved to {temp_filename}")
 
-
-
-# Function to adjust pitch and speed of audio using pydub
-def adjust_audio(audio_file, speed=1.0, pitch=1.0):
-    if audio_file:
-        try:
-            audio = AudioSegment.from_mp3(audio_file)
-        except:
-            try:
-                audio = AudioSegment.from_wav(audio_file)
-            except:
-                audio = AudioSegment.from_mp4(audio_file)
-
-        # Adjust pitch and speed
-        new_audio = audio._spawn(audio.raw_data, overrides={
-            "frame_rate": int(audio.frame_rate * speed),
-            "pitch": pitch
-        })
-
-        # Export modified audio
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_file:
-            temp_filename = temp_file.name
-            new_audio.export(temp_filename, format="mp3")
-
-        return temp_filename
-    else:
-        st.warning("Please convert text to speech first.")
-        return None
-    
 
 
 

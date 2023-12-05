@@ -107,9 +107,13 @@ def main():
         if st.button("Convert to speech 🔊"):
             with st.spinner("Converting text to speech... 🔊"):
                 if engine == "🗣️ Realistic voice":
+                    st.info("Converting text to speech... 🔊")
                     tts = TextToSpeech()
                     if st.session_state.hinditext:
+                        print("Processing text...")
+                        st.info("Processing text... 🔊")
                         audio_file = tts.text_to_audio(text=st.session_state.hinditext, play_chunks=False, play_combined=True)
+                        st.audio(audio_file, format='audio/mp3')
                         st.session_state.audio_file = audio_file
                     else:
                         st.warning("Please enter text in Hindi text area to convert to speech. 🇮🇳")
