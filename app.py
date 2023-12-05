@@ -72,9 +72,13 @@ def main():
 
     st.title("Text to Speech Converter 🎙️")
 
-    engine = st.radio("Select Text to Speech Engine 🛠️", ("🤖 Robot voice", "🗣️ Realistic voice"), horizontal=True, help="Select the engine to use for text-to-speech conversion.")
+    engine = st.radio("Select Text to Speech Engine 🛠️", ("🤖 Robot voice", "🗣️ Realistic voice"), horizontal=True, help="Select the engine to use for text-to-speech conversion.",index=1)
 
     if engine == "🗣️ Realistic voice":
+        # st.info("First, enter text in English. Then, click on the button to translate to Hindi. Finally, click on the button to convert to speech.")
+        #in bullet points
+        st.info("""This model only understands words written in Hindi. so, we need to translate the English text to Hindi first.\n
+        """)
         col1, col2 = st.columns(2)
 
         with col1:
