@@ -1,2 +1,3 @@
 ffmpeg
 libtinfo5
+portaudio19-dev
