@@ -5,7 +5,6 @@ from gtts import gTTS
 from googletrans import Translator
 from pydub import AudioSegment
 
-audio_file = None
 
 def init_session_state():
     if 'hinditext' not in st.session_state:
@@ -16,6 +15,7 @@ def init_session_state():
         st.session_state.gttsText = ''
     if 'audio_file' not in st.session_state:
         st.session_state.audio_file = None
+    
 
 # Function to convert text to speech using gtts
 def text_to_speech_gtts(text, lang='en', speed=1.0):
@@ -113,8 +113,6 @@ def main():
                         print("Processing text...")
                         st.info("Processing text... 🔊")
                         audio_file = tts.text_to_audio(text=st.session_state.hinditext, play_chunks=False, play_combined=True)
-                        st.audio(audio_file, format='audio/mp3')
-                        st.session_state.audio_file = audio_file
                     else:
                         st.warning("Please enter text in Hindi text area to convert to speech. 🇮🇳")
                 elif engine == "🤖 Robot voice":
