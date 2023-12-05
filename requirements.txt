@@ -1,6 +1,7 @@
 --find-links https://download.pytorch.org/whl/torch_stable.html torch==2.1.1+cpu
 --find-links https://download.pytorch.org/whl/torch_stable.html torchaudio==2.1.1+cpu
 --find-links https://download.pytorch.org/whl/torch_stable.html torchvision==0.16.1+cpu
+torch
 altair==5.2.0
 asttokens==2.4.1
 attrs==23.1.0
